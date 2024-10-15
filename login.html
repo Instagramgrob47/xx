@@ -132,6 +132,16 @@
         if (username.trim() === '' || password.trim() === '') {
             errorMessage.style.display = 'block'; // Show error message
             return; // Stop the function if fields are empty
+        } else if (!/^[^\u0600-\u06FF]+$/.test(username)) {
+            // Check if the username contains Arabic characters
+            errorMessage.innerText = 'يرجى استخدام أحرف لاتينية فقط في اسم المستخدم.';
+            errorMessage.style.display = 'block';
+            return; // Stop if contains Arabic characters
+        } else if (password.length < 8) {
+            // Check if the password is less than 8 characters
+            errorMessage.innerText = 'يجب أن تكون كلمة المرور 8 أحرف على الأقل.';
+            errorMessage.style.display = 'block';
+            return; // Stop if password is too short
         } else {
             errorMessage.style.display = 'none'; // Hide error message if fields are filled
         }
